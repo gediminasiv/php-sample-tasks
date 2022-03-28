@@ -19,16 +19,6 @@ class Movie
     {
         return $this->title . ' (' . $this->releaseYear . ')';
     }
-
-    function generateOutput()
-    {
-        echo '<div class="card col-4">';
-        echo '<img class="card-img-top" src="' . $this->imageUrl . '" alt="' . $this->title . '"/>';
-        echo '<div class="card-body">';
-        echo '<h3>' . $this->generateMovieCardTitle() . '</h3>';
-        echo '<p class="card-text">' . $this->synopsis . '</p>';
-        echo '</div></div>';
-    }
 }
 
 class CinemaMovie extends Movie
@@ -73,7 +63,6 @@ class RentalMovie extends Movie
 
 class MovieList extends FileManager
 {
-    public $movieType;
     public $cinemaMovies = [];
     public $rentalMovies = [];
 
