@@ -38,9 +38,13 @@
               <li class="nav-item">
                 <a class="nav-link" href="?page=upload">Upload files</a>
               </li>
+              <li class="divider"></li>
+              <li class="nav-item">
+                <a class="nav-link" href="?page=homework_students">Homework person list</a>
+              </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="?page=homework_students">Homework</a>
+                <a class="nav-link" href="?page=bank">Homework bank</a>
               </li>
             </ul>
           </li>

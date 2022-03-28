@@ -30,3 +30,15 @@ class Movie
         echo '</div></div>';
     }
 }
+
+class CinemaMovie extends Movie
+{
+    public $ticketPrice; // kiek kainuos bilietas i kina
+    public $premiereDate; // kada vyks premjera
+}
+
+class RentalMovie extends Movie
+{
+    public $moviePrice; // kiek kainuoja issinuomoti filma
+    public $rentalDuration; // kuriam laikui galima issinuomoti filma
+}
