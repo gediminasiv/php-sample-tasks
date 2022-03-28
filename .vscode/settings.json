@@ -1,0 +1,5 @@
+{
+  "phpcsfixer.config": "~/.vscode/php-cs-fixer.dist.php",
+  "phpcsfixer.execPath": "${extensionPath}/php-cs-fixer.phar",
+  "phpcsfixer.onsave": true
+}
