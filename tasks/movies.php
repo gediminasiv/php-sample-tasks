@@ -1,5 +1,6 @@
 <?php
 
+include 'files.php';
 include 'movie.php';
 include 'form.php';
 
@@ -23,14 +24,26 @@ $formInputs = [
         'name' => 'year',
         'placeholder' => 'Year released',
         'type' => 'number'
-    ]
+    ],
+    [
+        'name' => 'date',
+        'placeholder' => 'Rental duration/Cinema premiere',
+        'type' => 'text'
+    ],
+    [
+        'name' => 'price',
+        'placeholder' => 'Rental price/Cinema ticket price',
+        'type' => 'text'
+    ],
 ];
 
 $form = new MovieForm($formInputs);
 
 $form->processFormRequest($_POST);
 
-$filmJson = json_decode(file_get_contents('data/filmai.json'), true);
+$fileManager = new FileManager('data/filmai.json');
+
+$filmJson = $fileManager->readJsonToArray();
 ?>
 
 <div class="row">
@@ -41,20 +54,41 @@ $filmJson = json_decode(file_get_contents('data/filmai.json'), true);
     </div>
 </div>
 
-<div class="row">
-    <?php
-    foreach ($filmJson as $movie) {
-        if ($movie['movieType'] === 'cinema') {
-            $movieObject = new CinemaMovie;
-            $movieObject->setMovieInformation($movie['title'], $movie['synopsis'], $movie['year'], $movie['imageUrl']);
-            $movieObject->generateOutput();
+<hr />
 
-            continue;
-        }
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">
+            Filmai kine <span class="badge bg-primary">4</span>
+        </button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">
+            Filmai nuomoje <span class="badge bg-primary">4</span>
+        </button>
+    </li>
+</ul>
 
-        $movieObject = new RentalMovie;
-        $movieObject->setMovieInformation($movie['title'], $movie['synopsis'], $movie['year'], $movie['imageUrl']);
-        $movieObject->generateOutput();
-    }
-    ?>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <div class="row">
+            <?php
+            $movieList = new MovieList();
+
+            foreach ($movieList->cinemaMovies as $movie) {
+                echo $movie->generateOutput();
+            }
+            ?>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="row">
+            <?php
+
+            foreach ($movieList->rentalMovies as $movie) {
+                echo $movie->generateOutput();
+            }
+            ?>
+        </div>
+    </div>
 </div>

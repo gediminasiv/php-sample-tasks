@@ -1,1 +1,47 @@
-[{"movieType":"cinema","title":"Kenguros siauteja","synopsis":"Kenguros ir vel isprotejo","year":"2010","imageUrl":"uploads\/kenguros.jpg"},{"movieType":"cinema","title":"Indiana Dzounsas ir Kristoline Kaukole","synopsis":"Indiana Dzounsas gelbeja dar viena kristoline kaukole","year":"2007","imageUrl":"uploads\/indiana-jones.jpg"},{"movieType":"rental","title":"Juros periodo parkas","synopsis":"Filmas apie mokslininkus, kurie nusprende atgaivinti dinozaurus","year":"1993","imageUrl":"uploads\/jurassic-park.jpeg"},{"movieType":"rental","title":"Ziedu valdovas","synopsis":"Siame filme hobitu komanda keliauja i mordoro karalyste, kad imestu blogio zieda i degancia duobe","year":"2001","imageUrl":"uploads\/lotr.jpeg"}]
+[
+    {
+       "movieType":"cinema",
+       "title":"Kenguros siauteja",
+       "synopsis":"Kenguros ir vel isprotejo",
+       "year":"2010",
+       "imageUrl":"uploads\/kenguros.jpg",
+       "premiereDate":"2022-04-01",
+       "ticketPrice":"9.99"
+    },
+    {
+       "movieType":"cinema",
+       "title":"Indiana Dzounsas ir Kristoline Kaukole",
+       "synopsis":"Indiana Dzounsas gelbeja dar viena kristoline kaukole",
+       "year":"2007",
+       "imageUrl":"uploads\/indiana-jones.jpg",
+       "premiereDate":"2022-04-05",
+       "ticketPrice":"19.99"
+    },
+    {
+       "movieType":"rental",
+       "title":"Juros periodo parkas",
+       "synopsis":"Filmas apie mokslininkus, kurie nusprende atgaivinti dinozaurus",
+       "year":"1993",
+       "imageUrl":"uploads\/jurassic-park.jpeg",
+       "rentalDuration":7,
+       "rentalPrice":5.45
+    },
+    {
+       "movieType":"rental",
+       "title":"Ziedu valdovas",
+       "synopsis":"Siame filme hobitu komanda keliauja i mordoro karalyste, kad imestu blogio zieda i degancia duobe",
+       "year":"2001",
+       "imageUrl":"uploads\/lotr.jpeg",
+       "rentalDuration":10,
+       "rentalPrice":8.55
+    },
+    {
+       "movieType":"rental",
+       "title":"Indiana Jones",
+       "synopsis":"NAJSDNADKAJD",
+       "year":"2009",
+       "imageUrl":"uploads\/indiana.jpg",
+       "rentalDuration":14,
+       "rentalPrice":6.44
+    }
+ ]

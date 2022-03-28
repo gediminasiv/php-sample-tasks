@@ -1,18 +1,19 @@
 <?php
 
-class MovieForm
+class MovieForm extends FileManager
 {
     public $formInputs;
 
     function __construct($formInputs)
     {
+        parent::__construct('data/filmai.json');
         $this->formInputs = $formInputs;
     }
 
     function processFormRequest($postData)
     {
         if (isset($postData['submit'])) {
-            $filmJson = json_decode(file_get_contents('data/filmai.json'), true);
+            $filmJson = $this->readJsonToArray();
 
             $filename = 'uploads/' . $_FILES['fileToUpload']['name'];
 
@@ -25,9 +26,18 @@ class MovieForm
                 'year' => $_POST['year'],
                 'imageUrl' => $filename
             ];
+
+            if ($_POST['movieType'] === 'cinema') {
+                $newMovie['premiereDate'] = $_POST['date'];
+                $newMovie['ticketPrice'] = $_POST['price'];
+            } else {
+                $newMovie['rentalDuration'] = $_POST['date'];
+                $newMovie['rentalPrice'] = $_POST['price'];
+            }
+
             $filmJson[] = $newMovie;
 
-            file_put_contents('data/filmai.json', json_encode($filmJson));
+            $this->writeArrayToJson($filmJson);
 
             header('Location: /?page=movies');
         }
