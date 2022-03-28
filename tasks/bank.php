@@ -1,5 +1,7 @@
 <?php
 
+include 'form.php';
+
 class BankAccount
 {
     public $balance = 0;
@@ -29,10 +31,8 @@ class BankAccount
 
     function updateFile()
     {
-        file_put_contents('data/bankAccount.json', json_encode([
-            'balance' => $this->balance,
-            'accountNumber' => $this->accountNumber
-        ]));
+        $_SESSION['balance'] = $this->balance;
+        $_SESSION['accountNumber'] = $this->accountNumber;
     }
 
     function displayBalance()
@@ -41,13 +41,12 @@ class BankAccount
     }
 }
 
-if (!file_exists('data/bankAccount.json')) {
-    file_put_contents('data/bankAccount.json', json_encode(['balance' => 0, 'accountNumber' => 'LT' . rand(100000, 999999)]));
+if (!isset($_SESSION['accountNumber'])) {
+    $_SESSION['accountNumber'] = 'LT' . rand(100000, 999999);
+    $_SESSION['balance'] = 0;
 }
 
-$bankInfo = json_decode(file_get_contents('data/bankAccount.json'), true);
-
-$bankAccount = new BankAccount($bankInfo['accountNumber'], $bankInfo['balance']);
+$bankAccount = new BankAccount($_SESSION['accountNumber'], $_SESSION['balance']);
 
 if (isset($_POST['submit'])) {
     $action = $_POST['action'];
