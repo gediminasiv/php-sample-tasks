@@ -2,6 +2,66 @@
 
 class Calculator
 {
+    public $numberOne;
+    public $numberTwo;
+
+    function __construct($numberOne, $numberTwo)
+    {
+        $this->numberOne = $numberOne;
+        $this->numberTwo = $numberTwo;
+    }
+
+    function handleRequest($action)
+    {
+        if ($action === 'add') {
+            return $this->add();
+        } else if ($action === 'subtract') {
+            return $this->subtract();
+        } else if ($action === 'multiply') {
+            return $this->multiply();
+        } else if ($action === 'division') {
+            return $this->divide();
+        }
+    }
+
+    function add()
+    {
+        return $this->numberOne + $this->numberTwo;
+    }
+
+    function subtract()
+    {
+        return $this->numberOne - $this->numberTwo;
+    }
+
+    function multiply()
+    {
+        return $this->numberOne * $this->numberTwo;
+    }
+
+    function divide()
+    {
+        return $this->numberOne / $this->numberTwo;
+    }
+
+    function getActionSign($action)
+    {
+        if ($action === 'add') {
+            return '+';
+        } else if ($action === 'subtract') {
+            return '-';
+        } else if ($action === 'multiply') {
+            return 'x';
+        } else if ($action === 'division') {
+            return ':';
+        }
+    }
+}
+
+if (isset($_POST['action'])) {
+    $calculator = new Calculator($_POST['firstNumber'], $_POST['secondNumber']);
+
+    $calculator->handleRequest($_POST['action']);
 }
 
 ?>
@@ -10,7 +70,7 @@ class Calculator
     <form method="post">
         <div class="mb-3">
             <label class="form-label">Skaičius 1:</label>
-            <input name="firstNumber" type="number" class="form-control" />
+            <input name="firstNumber" value="<?= isset($_POST['firstNumber']) ? $_POST['firstNumber'] : null; ?>" type="number" class="form-control" />
         </div>
 
         <div class="mb-3">
@@ -25,7 +85,7 @@ class Calculator
 
         <div class="mb-3">
             <label class="form-label">Skaičius 2:</label>
-            <input name="secondNumber" type="number" class="form-control" />
+            <input name="secondNumber" value="<?= isset($_POST['secondNumber']) ? $_POST['secondNumber'] : null; ?>" type="number" type="number" class="form-control" />
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -33,7 +93,13 @@ class Calculator
 
     <hr />
 
-    <div>
-        <b>Rezultatas:</b> 8 + 8 = 16
-    </div>
+    <?php if (isset($_POST['action'])) { ?>
+        <div>
+            <b>Rezultatas:</b>
+            <?= $calculator->numberOne; ?>
+            <?= $calculator->getActionSign($_POST['action']); ?>
+            <?= $calculator->numberTwo; ?> = <?= $calculator->handleRequest($_POST['action']); ?>
+        </div>
+    <?php } ?>
+
 </div>

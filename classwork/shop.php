@@ -18,12 +18,14 @@ class StockItem extends FileManager
     }
 }
 
+$bankAccount = new BankAccount($_SESSION['accountNumber'], $_SESSION['balance']);
+
 $stock = new StockItem();
 ?>
 
 <div class="row">
     <div class="col">
-        <b>Sąskaitos likutis: </b>$250<br />
+        <b>Sąskaitos likutis: </b>$<?= $bankAccount->balance; ?><br />
         <a class="btn btn-primary" href="?page=bank">Prisijungti prie banko (ten galima įsidėti pinigų 😉)</a>
         <hr />
         <p>Mano daiktai:</p>

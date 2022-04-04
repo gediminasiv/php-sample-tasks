@@ -21,6 +21,10 @@ class BankAccount
 
     function deposit($amount)
     {
+        if ($amount < 0) {
+            return;
+        }
+
         $this->balance += $amount;
         $this->updateData();
     }

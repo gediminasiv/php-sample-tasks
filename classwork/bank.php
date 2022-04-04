@@ -2,9 +2,14 @@
 
 include 'bank-account.class.php';
 
+
+$fileManager = new FileManager('data/bankAccounts.json');
+
+$bankAccounts = $fileManager->readJsonToArray();
+
 $bankAccount = new BankAccount($_SESSION['accountNumber'], $_SESSION['balance']);
 
-if (isset($_POST['submit'])) {
+if (isset($_POST['submit'])) { // deposit forma
     $action = $_POST['action'];
 
     if ($action === 'deposit') {
@@ -16,6 +21,20 @@ if (isset($_POST['submit'])) {
     header('Location: ?page=bank');
 }
 
+if (isset($_POST['submit-bank-client-action'])) { // deposit forma
+    foreach ($bankAccounts as $key => $_bankAccount) {
+        if ($_POST['client'] === $_bankAccount['accountNumber']) {
+            $bankAccounts[$key]['balance'] += $_POST['amount'];
+
+            $bankAccount->withdraw($_POST['amount']);
+            $bankAccount->updateData();
+        }
+    }
+
+    $fileManager->writeArrayToJson($bankAccounts);
+
+    header('Location: ?page=bank');
+}
 ?>
 <div class="row">
     <div class="col">
@@ -58,10 +77,13 @@ if (isset($_POST['submit'])) {
                 <form method="post">
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Banko klientai:</label>
-                        <select name='action' class="form-control" id="exampleFormControlSelect1">
-                            <option value="LT821580">LT821580 ($100)</option>
-                            <option value="LT293818">LT293818 ($200)</option>
-                            <option value="LT141234">LT141234 ($200)</option>
+                        <select name='client' class="form-control" id="exampleFormControlSelect1">
+                            <?php foreach ($bankAccounts as $bankAccount) { ?>
+                                <?php var_dump($bankAccount); ?>
+                                <option value="<?= $bankAccount['accountNumber']; ?>">
+                                    <?= $bankAccount['accountNumber']; ?> ($<?= $bankAccount['balance']; ?>)
+                                </option>
+                            <?php } ?>
                         </select>
                     </div>
                     <br />
