@@ -40,6 +40,8 @@
       include 'tasks/bank.php';
     } else if ($page === 'homework_students') {
       include 'tasks/homework.php';
+    } else if ($page === 'shopping-list-mysql') {
+      include 'tasks/shopping-list-mysql.php';
     }
     ?>
   </div>
