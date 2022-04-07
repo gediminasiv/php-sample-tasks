@@ -42,6 +42,8 @@
       include 'tasks/homework.php';
     } else if ($page === 'shopping-list-mysql') {
       include 'tasks/shopping-list-mysql.php';
+    } else if ($page === 'basketball-mysql') {
+      include 'tasks/basketball.php';
     }
     ?>
   </div>
