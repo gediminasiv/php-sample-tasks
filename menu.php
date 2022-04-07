@@ -51,6 +51,10 @@
               <li class="nav-item">
                 <a class="nav-link" href="?page=bank">Homework bank</a>
               </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="?page=basketball-mysql">Basketball</a>
+              </li>
             </ul>
           </li>
         </ul>
