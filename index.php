@@ -47,6 +47,8 @@
       include 'tasks/basketball.php';
     } else if ($page === 'register') {
       include 'tasks/register.php';
+    } else if ($page === 'login') {
+      include 'tasks/login.php';
     }
     ?>
   </div>

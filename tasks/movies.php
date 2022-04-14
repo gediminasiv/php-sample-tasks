@@ -63,12 +63,23 @@ $form->processFormRequest($_POST);
 
 <div class="row">
     <div class="card col-3">
-        <div class="card-body">
-            <h5 class="card-title">Pridėti filmą</h5>
-            <?php
-            $form->generateFormHtml();
-            ?>
-        </div>
+        <?php if (isset($_SESSION['userId'])) { ?>
+
+            <div class="card-body">
+                <h5 class="card-title">Pridėti filmą</h5>
+                <?php
+                $form->generateFormHtml();
+                ?>
+            </div>
+
+        <?php } else { ?>
+
+            <div class="card-body">
+                <p>Filma i sarasa galima prideti tik prisijungus</p>
+                <a class="btn btn-primary" href="?page=login">Prisijungimas</a>
+            </div>
+
+        <?php } ?>
     </div>
 
     <div class="col-8 offset-1">

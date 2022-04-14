@@ -1,6 +1,7 @@
 <?php
 include 'database.php';
 include 'form.php';
+include 'user.php';
 
 $form = new Form([
     [
@@ -19,6 +20,34 @@ $form = new Form([
         'type' => 'password'
     ],
 ]);
+
+if (isset($_POST['submit'])) {
+    $user = new User();
+    $existingUser = $user->doesUserExist($_POST['username']);
+
+    if ($existingUser) {
+        // klaidos logikos pridejimas
+        header('Location: ?page=register');
+    }
+
+    if ($_POST['password'] !== $_POST['passwordRepeat']) {
+        // dar vienas klaidos aprasymo pridejimas
+        header('Location: ?page=register');
+    }
+
+    $newUser = [
+        'username' => $_POST['username'],
+        'password' => md5($_POST['password']) //todo: change to better encoding
+    ];
+
+    $userQuery = $form->pdo->prepare("INSERT INTO users SET username=:username, password=:password");
+    $userQuery->execute($newUser);
+
+    // sekmes pranesimo aprasymo pridejimas
+
+    header('Location: ?page=register');
+}
+
 ?>
 
 <div class="row">
@@ -32,7 +61,3 @@ $form = new Form([
         </div>
     </div>
 </div>
-
-<?php
-
-var_dump('test');
