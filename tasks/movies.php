@@ -1,6 +1,6 @@
 <?php
 
-include 'files.php';
+include 'database.php';
 include 'movie.php';
 include 'form.php';
 
@@ -55,10 +55,6 @@ $formInputs = [
 $form = new MovieForm($formInputs);
 
 $form->processFormRequest($_POST);
-
-$fileManager = new FileManager('data/filmai.json');
-
-$filmJson = $fileManager->readJsonToArray();
 ?>
 
 <div class="row">
@@ -104,7 +100,6 @@ $filmJson = $fileManager->readJsonToArray();
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                 <div class="row">
                     <?php
-
                     foreach ($movieList->rentalMovies as $movie) {
                         echo $movie->generateOutput();
                     }

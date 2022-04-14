@@ -1,12 +1,12 @@
 <?php
 
-class Form extends FileManager
+class Form extends Database
 {
     public $formInputs;
 
-    function __construct($moviePath, $formInputs)
+    function __construct($formInputs)
     {
-        parent::__construct($moviePath);
+        parent::__construct();
 
         $this->formInputs = $formInputs;
     }
@@ -51,6 +51,9 @@ class MovieForm extends Form
     function processFormRequest($postData)
     {
         if (isset($postData['submit'])) {
+            var_dump($postData);
+            die;
+
             $filmJson = $this->readJsonToArray();
 
             $filename = 'uploads/' . $_FILES['fileToUpload']['name'];

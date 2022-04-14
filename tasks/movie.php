@@ -61,27 +61,31 @@ class RentalMovie extends Movie
     }
 }
 
-class MovieList extends FileManager
+class MovieList extends Database
 {
     public $cinemaMovies = [];
     public $rentalMovies = [];
 
     function __construct()
     {
-        parent::__construct('data/filmai.json');
+        parent::__construct();
+
         $this->sortFilmsByType();
     }
 
     function sortFilmsByType()
     {
-        $filmJson = $this->readJsonToArray();
+        $moviesQuery = $this->pdo->prepare('SELECT * FROM movies');
+        $moviesQuery->execute();
 
-        foreach ($filmJson as $movie) {
-            $object = $movie['movieType'] === 'cinema' ? new CinemaMovie : new RentalMovie;
+        $movies = $moviesQuery->fetchAll();
+
+        foreach ($movies as $movie) {
+            $object = $movie['type'] === 'cinema' ? new CinemaMovie : new RentalMovie;
 
             $object->setMovieInformation($movie['title'], $movie['synopsis'], $movie['year'], $movie['imageUrl']);
 
-            if ($movie['movieType'] === 'cinema') {
+            if ($movie['type'] === 'cinema') {
                 $object->ticketPrice = $movie['ticketPrice'];
                 $object->premiereDate = $movie['premiereDate'];
 
