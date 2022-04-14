@@ -10,6 +10,15 @@
           <li class="nav-item">
             <a class="nav-link" href="?page=movies">Movie list</a>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="?page=register">Registracija</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="?page=login">Prisijungimas</a>
+          </li>
+
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Previous tasks

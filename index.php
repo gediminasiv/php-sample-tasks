@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
   <link rel="stylesheet" href="css/main.css" />
   <script src="js/bootstrap.min.js"></script>
+
   <title>Document</title>
 </head>
 
@@ -44,10 +45,12 @@
       include 'tasks/shopping-list-mysql.php';
     } else if ($page === 'basketball-mysql') {
       include 'tasks/basketball.php';
+    } else if ($page === 'register') {
+      include 'tasks/register.php';
     }
     ?>
   </div>
-
+  <script src="js/app.js"></script>
 </body>
 
 </html>

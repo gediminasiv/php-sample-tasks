@@ -11,7 +11,7 @@ $formInputs = [
         'type' => 'file'
     ],
     [
-        'name' => 'movieType',
+        'name' => 'type',
         'placeholder' => 'Ar tai filmas kine ar videonuomoje?',
         'type' => 'select'
     ],
@@ -34,21 +34,25 @@ $formInputs = [
         'name' => 'rentalDuration',
         'placeholder' => 'Rental duration',
         'type' => 'text',
+        'class' => 'rental'
     ],
     [
         'name' => 'rentalPrice',
         'placeholder' => 'Rental price',
-        'type' => 'number'
+        'type' => 'number',
+        'class' => 'rental'
     ],
     [
-        'name' => 'cinemaPremiereDate',
+        'name' => 'premiereDate',
         'placeholder' => 'Cinema premiere date',
-        'type' => 'text'
+        'type' => 'text',
+        'class' => 'cinema',
     ],
     [
-        'name' => 'cinemaTicketPrice',
+        'name' => 'ticketPrice',
         'placeholder' => 'Cinema ticket price',
-        'type' => 'number'
+        'type' => 'number',
+        'class' => 'cinema',
     ],
 ];
 
