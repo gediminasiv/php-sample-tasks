@@ -1,4 +1,13 @@
 <?php
+
+$userObject = new User();
+
+$user = null;
+
+if (isset($_SESSION['userId'])) {
+  $user = $userObject->getUserById($_SESSION['userId']);
+}
+
 function generateLink($linkTo, $linkTitle)
 {
   $link = '<a class="nav-link';
@@ -23,17 +32,32 @@ function generateLink($linkTo, $linkTitle)
 
           <li class="nav-item">
             <?= generateLink('movies', 'Movie list'); ?>
-            <a class="nav-link" href="?page=movies">Movie list</a>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="?page=register">Registracija</a>
-          </li>
+          <?php if (!$user) { ?>
 
-          <li class="nav-item">
-            <a class="nav-link" href="?page=login">Prisijungimas</a>
-          </li>
+            <li class="nav-item">
+              <?= generateLink('register', 'Registracija'); ?>
+            </li>
 
+            <li class="nav-item">
+              <?= generateLink('login', 'Prisijungimas'); ?>
+            </li>
+
+          <?php } else { ?>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Prisijungęs kaip: <?= $user['username']; ?>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li class="nav-item">
+                  <a class="nav-link" href="?page=logout">Atsijungti</a>
+                </li>
+              </ul>
+            </li>
+
+          <?php } ?>
           <?php /*
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

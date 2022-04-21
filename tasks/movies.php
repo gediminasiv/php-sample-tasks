@@ -82,9 +82,26 @@ $form->processFormRequest($_POST);
     </div>
 
     <div class="col-8 offset-1">
+        <div class="text-right">
+            <h4>Filtruoti pagal vartotoja:</h4>
+            <div class="form-group">
+                <select id="user-filter" name="user" class="form-control">
+                    <option value="">Visi</option>
+                    <option value="1">test</option>
+                    <option value="3">test2</option>
+                </select>
+
+                <button id="filter-button" class="btn btn-primary">Filtruoti</button>
+            </div>
+        </div>
+
         <?php
 
         $movieList = new MovieList();
+
+        if (isset($_GET['userFilter'])) {
+            $movieList = new MovieList($_GET['userFilter']);
+        }
 
         ?>
 

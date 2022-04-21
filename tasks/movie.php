@@ -6,6 +6,7 @@ class Movie
     public $synopsis;
     public $releaseYear;
     public $imageUrl;
+    public $username;
 
     function setMovieInformation($pavadinimas, $sinopsis, $metai, $imageUrl)
     {
@@ -18,6 +19,11 @@ class Movie
     function generateMovieCardTitle()
     {
         return $this->title . ' (' . $this->releaseYear . ')';
+    }
+
+    function getUploadedUser()
+    {
+        return $this->username ? $this->username : 'Autorius nežinomas';
     }
 }
 
@@ -37,6 +43,7 @@ class CinemaMovie extends Movie
         echo '<div class="card-footer">';
         echo '<p>Premjeros data: ' . $this->premiereDate . '</p>';
         echo '<p>Bilieto kaina: ' . $this->ticketPrice . '$</p>';
+        echo '<p>Įkėlė: ' . $this->getUploadedUser() . '</p>';
         echo '</div></div>';
     }
 }
@@ -57,26 +64,39 @@ class RentalMovie extends Movie
         echo '<div class="card-footer">';
         echo '<p>Nuomos kaina: ' . $this->rentalPrice . '$</p>';
         echo '<p>Nuomos trukme: ' . $this->rentalDuration . ' d.</p>';
+        echo '<p>Įkėlė: ' . $this->getUploadedUser() . '</p>';
         echo '</div></div>';
     }
 }
 
 class MovieList extends Database
 {
+    public $userId = null;
     public $cinemaMovies = [];
     public $rentalMovies = [];
 
-    function __construct()
+    function __construct($userId = null)
     {
         parent::__construct();
+
+        $this->userId = $userId;
 
         $this->sortFilmsByType();
     }
 
     function sortFilmsByType()
     {
-        $moviesQuery = $this->pdo->prepare('SELECT * FROM movies');
-        $moviesQuery->execute();
+        $params = [];
+
+        if (!$this->userId) {
+            $moviesQuery = $this->pdo->prepare('SELECT * FROM movies LEFT JOIN users ON movies.user_id = users.id');
+        } else {
+            $moviesQuery = $this->pdo->prepare('SELECT * FROM movies
+                LEFT JOIN users ON movies.user_id = users.id
+                WHERE users.id = :id');
+            $params['id'] = $this->userId;
+        }
+        $moviesQuery->execute($params);
 
         $movies = $moviesQuery->fetchAll();
 
@@ -84,6 +104,8 @@ class MovieList extends Database
             $object = $movie['type'] === 'cinema' ? new CinemaMovie : new RentalMovie;
 
             $object->setMovieInformation($movie['title'], $movie['synopsis'], $movie['year'], $movie['imageUrl']);
+
+            $object->username = $movie['username'];
 
             if ($movie['type'] === 'cinema') {
                 $object->ticketPrice = $movie['ticketPrice'];

@@ -59,6 +59,8 @@ if (isset($_POST['submit'])) {
 
 function generateAlert($alertText, $alertType)
 {
+    $_SESSION['registerError'] = '';
+
     return '<div class="alert ' . $alertType . '">' . $alertText . '</div>';
 }
 
@@ -72,9 +74,10 @@ function generateAlert($alertText, $alertType)
 
                 <?= generateAlert('Jūsų registracija sėkminga! Galite prisijungti.', 'alert-success'); ?>
 
-                <?php if (isset($_SESSION['registerError'])) { ?>
-                    <?= generateAlert('Viena is dvieju klaida', 'alert-danger'); ?>
-                <?php } ?>
+                <?php if (isset($_SESSION['registerError']) && !empty($_SESSION['registerError'])) { ?>
+                    <?= generateAlert($_SESSION['registerError'], 'alert-danger'); ?>
+                <?php
+                } ?>
 
                 <?php $form->generateFormHtml(); ?>
             </div>

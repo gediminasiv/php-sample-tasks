@@ -1,5 +1,8 @@
 const movieTypeSelect = document.getElementById("exampleFormControlSelect1");
 
+const userFilterSelect = document.getElementById("user-filter");
+const filterButton = document.getElementById("filter-button");
+
 function hideUnneededFields() {
   const movieType = movieTypeSelect.value;
   const inputsToHide = document.getElementsByClassName(
@@ -16,8 +19,21 @@ function hideUnneededFields() {
   }
 }
 
+function filterMoviesByUser() {
+  const userId = userFilterSelect.value;
+
+  if (userId.length < 1) {
+    return (window.location.href = "?page=movies");
+  }
+
+  return (window.location.href = "?page=movies&userFilter=" + userId);
+}
+
 movieTypeSelect.onchange = () => {
   hideUnneededFields();
+};
+filterButton.onclick = () => {
+  filterMoviesByUser();
 };
 
 hideUnneededFields();

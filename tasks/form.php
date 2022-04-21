@@ -58,6 +58,7 @@ class MovieForm extends Form
             move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $filename);
 
             $newMovie = [
+                'userId' => $_SESSION['userId'],
                 'type' => $_POST['type'],
                 'title' => $_POST['title'],
                 'synopsis' => $_POST['synopsis'],
@@ -78,6 +79,7 @@ class MovieForm extends Form
             }
 
             $createMovieQuery = $this->pdo->prepare("INSERT INTO movies SET
+            user_id=:userId,
             type=:type,
             title=:title,
             synopsis=:synopsis,

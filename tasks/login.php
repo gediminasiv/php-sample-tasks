@@ -2,6 +2,8 @@
 
 include 'form.php';
 
+var_dump($_SESSION);
+
 $form = new Form([
     [
         'name' => 'username',
@@ -31,6 +33,10 @@ function login()
     }
 
     $_SESSION['userId'] = $existingUser['id'];
+
+    header('Location: ?page=movies');
+
+    return;
 }
 
 if (isset($_POST['submit'])) {
