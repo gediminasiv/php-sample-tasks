@@ -1,4 +1,8 @@
-<?php session_start(); ?>
+<?php
+include 'tasks/database.php';
+include 'tasks/user.php';
+
+session_start(); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,28 +27,10 @@
   <div class="container">
     <?php
 
-    $page = isset($_GET['page']) ? $_GET['page'] : 'counter';
+    $page = isset($_GET['page']) ? $_GET['page'] : 'movies';
 
-    if ($page == 'counter') {
-      include 'tasks/counter.php';
-    } else if ($page == 'taupykle') {
-      include 'tasks/taupykle.php';
-    } else if ($page == 'shopping-list') {
-      include 'tasks/shopping-list.php';
-    } else if ($page === 'guess-the-number') {
-      include 'tasks/guess-the-number.php';
-    } else if ($page == 'upload') {
-      include 'tasks/upload.php';
-    } else if ($page === 'movies') {
+    if ($page === 'movies') {
       include 'tasks/movies.php';
-    } else if ($page === 'bank') {
-      include 'tasks/bank.php';
-    } else if ($page === 'homework_students') {
-      include 'tasks/homework.php';
-    } else if ($page === 'shopping-list-mysql') {
-      include 'tasks/shopping-list-mysql.php';
-    } else if ($page === 'basketball-mysql') {
-      include 'tasks/basketball.php';
     } else if ($page === 'register') {
       include 'tasks/register.php';
     } else if ($page === 'login') {

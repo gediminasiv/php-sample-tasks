@@ -15,6 +15,10 @@ class User extends Database
         return $userQuery->fetch();
     }
 
+    function getUserById($id)
+    {
+    }
+
     function getUserByUsernameAndPassword($username, $password)
     {
         $userQuery = $this->pdo->prepare("SELECT * FROM users WHERE

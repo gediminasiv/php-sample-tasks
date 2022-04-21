@@ -19,6 +19,7 @@
             <a class="nav-link" href="?page=login">Prisijungimas</a>
           </li>
 
+          <?php /*
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Previous tasks
@@ -66,6 +67,7 @@
               </li>
             </ul>
           </li>
+          */ ?>
         </ul>
       </div>
     </div>

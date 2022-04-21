@@ -1,7 +1,6 @@
 <?php
-include 'database.php';
+
 include 'form.php';
-include 'user.php';
 
 $form = new Form([
     [
@@ -21,7 +20,9 @@ $form = new Form([
     ],
 ]);
 
-if (isset($_POST['submit'])) {
+function registerUser()
+{
+    $form = new Form([]);
     $user = new User();
     $existingUser = $user->doesUserExist($_POST['username']);
 
@@ -46,6 +47,10 @@ if (isset($_POST['submit'])) {
     // sekmes pranesimo aprasymo pridejimas
 
     header('Location: ?page=register');
+}
+
+if (isset($_POST['submit'])) {
+    registerUser();
 }
 
 ?>

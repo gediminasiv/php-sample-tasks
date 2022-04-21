@@ -1,6 +1,5 @@
 <?php
 
-include 'database.php';
 include 'movie.php';
 include 'form.php';
 

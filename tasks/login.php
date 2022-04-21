@@ -1,8 +1,6 @@
 <?php
 
-include 'database.php';
 include 'form.php';
-include 'user.php';
 
 $form = new Form([
     [
@@ -17,7 +15,8 @@ $form = new Form([
     ]
 ]);
 
-if (isset($_POST['submit'])) {
+function login()
+{
     $user = new User();
 
     $existingUser = $user->getUserByUsernameAndPassword(
@@ -28,9 +27,14 @@ if (isset($_POST['submit'])) {
     if (!$existingUser) {
         // pranesim apie klaida kazkada
         header('Location: ?page=login');
+        return;
     }
 
     $_SESSION['userId'] = $existingUser['id'];
+}
+
+if (isset($_POST['submit'])) {
+    login();
 }
 
 ?>
