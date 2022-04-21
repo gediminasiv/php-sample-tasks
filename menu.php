@@ -1,3 +1,17 @@
+<?php
+function generateLink($linkTo, $linkTitle)
+{
+  $link = '<a class="nav-link';
+
+  if (isset($_GET['page']) && $linkTo === $_GET['page']) {
+    $link .= ' active';
+  }
+  $link .= '" href="?page=' . $linkTo . '">' . $linkTitle . '</a>';
+
+  return $link;
+}
+?>
+
 <div class="container">
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
@@ -8,6 +22,7 @@
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
           <li class="nav-item">
+            <?= generateLink('movies', 'Movie list'); ?>
             <a class="nav-link" href="?page=movies">Movie list</a>
           </li>
 
