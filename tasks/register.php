@@ -27,13 +27,17 @@ function registerUser()
     $existingUser = $user->doesUserExist($_POST['username']);
 
     if ($existingUser) {
-        // klaidos logikos pridejimas
+        $_SESSION['registerError'] = 'Šis vartotojas užregistruotas';
+
         header('Location: ?page=register');
+        return;
     }
 
     if ($_POST['password'] !== $_POST['passwordRepeat']) {
+        $_SESSION['registerError'] = 'Jūsų slaptažodžiai nesutampa';
         // dar vienas klaidos aprasymo pridejimas
         header('Location: ?page=register');
+        return;
     }
 
     $newUser = [
@@ -53,6 +57,11 @@ if (isset($_POST['submit'])) {
     registerUser();
 }
 
+function generateAlert($alertText, $alertType)
+{
+    return '<div class="alert ' . $alertType . '">' . $alertText . '</div>';
+}
+
 ?>
 
 <div class="row">
@@ -60,6 +69,12 @@ if (isset($_POST['submit'])) {
         <div class="card">
             <div class="card-body">
                 <h3>Registracija</h3>
+
+                <?= generateAlert('Jūsų registracija sėkminga! Galite prisijungti.', 'alert-success'); ?>
+
+                <?php if (isset($_SESSION['registerError'])) { ?>
+                    <?= generateAlert('Viena is dvieju klaida', 'alert-danger'); ?>
+                <?php } ?>
 
                 <?php $form->generateFormHtml(); ?>
             </div>
