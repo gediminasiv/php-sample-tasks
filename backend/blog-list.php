@@ -8,12 +8,29 @@ $form = new Form([
     [
         'type' => 'select',
         'name' => 'category',
+        'placeholder' => 'Select category',
         'values' => [
             [
                 'id' => 1,
-                'name' => 'art deco'
+                'name' => 'Art installation'
+            ],
+            [
+                'id' => 2,
+                'name' => 'Print design'
+            ],
+            [
+                'id' => 3,
+                'name' => 'Design workshops'
+            ],
+            [
+                'id' => 4,
+                'name' => 'Creative kitchen'
             ]
         ]
+    ], [
+        'type' => 'input',
+        'name' => 'title',
+        'placeholder' => 'Blog title'
     ]
 ]);
 

@@ -11,16 +11,6 @@ class Form
 
     function generateInputHtml($name, $placeholder, $class, $type = 'text')
     {
-        if ($type === 'select') {
-            return '<div class="form-group ' . $class . '">
-            <label for="exampleFormControlSelect1">' . $placeholder . '</label>
-            <select name=' . $name . ' class="form-control" id="exampleFormControlSelect1">
-              <option value="cinema">Kino filmas</option>
-              <option value="rental">Videonuomos filmas</option>
-            </select>
-          </div><br />';
-        }
-
         return '<div class="form-group ' . $class . '">
         <label>' . $placeholder . '</label>
         <input type=' . $type . ' class="form-control" name="' . $name . '" placeholder="' . $placeholder . '" />
@@ -29,13 +19,16 @@ class Form
 
     function generateSelectHtml($name, $placeholder, $values)
     {
-        $selectHtml = '<select name="' . $name . '" class="form-control">';
+        $selectHtml = '<div class="form-group">';
+        $selectHtml .= '<label>' . $placeholder . '</label>';
+        $selectHtml .= '<select name="' . $name . '" class="form-control">';
+        $selectHtml .= '<option disabled selected value="">' . $placeholder . '</option>';
 
         foreach ($values as $value) {
-            $selectHtml .= '<option values="' . $value['id'] . '">' . $value['name'] . '</option>';
+            $selectHtml .= '<option value="' . $value['id'] . '">' . $value['name'] . '</option>';
         }
 
-        $selectHtml .= '</select>';
+        $selectHtml .= '</select></div>';
 
         return $selectHtml;
     }
@@ -48,7 +41,7 @@ class Form
             $class = isset($formInput['class']) ? $formInput['class'] : null;
 
             if ($formInput['type'] === 'select') {
-                echo $this->generateSelectHtml($formInput['name'], $formInput['name'], []);
+                echo $this->generateSelectHtml($formInput['name'], $formInput['placeholder'], $formInput['values']);
                 continue;
             }
 
