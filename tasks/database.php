@@ -6,6 +6,6 @@ class Database
 
     function __construct()
     {
-        $this->pdo = new Pdo('mysql:host=localhost;dbname=codeacademy;user=root;password=root');
+        $this->pdo = new Pdo('mysql:host=localhost;dbname=gelbetojai;user=root;password=root');
     }
 }
