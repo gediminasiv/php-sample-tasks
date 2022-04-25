@@ -23,7 +23,10 @@ include 'backend/class/form.php';
     <div class="container">
         <?php if (!isset($_SESSION['userId'])) {
             include 'backend/admin/login.php';
-        } else { ?>
+        } else {
+            include 'backend/admin/menu.php';
+        ?>
+
             Vartotojas prisijungęs
         <?php } ?>
     </div>
