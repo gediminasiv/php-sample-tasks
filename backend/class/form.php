@@ -17,6 +17,14 @@ class Form
         </div><br />';
     }
 
+    function generateTextareaHtml($name, $placeholder)
+    {
+        return '<div class="form-group">
+            <label>' . $placeholder . '</label>
+            <textarea class="form-control" name="' . $name . '"></textarea>
+        </div>';
+    }
+
     function generateSelectHtml($name, $placeholder, $values)
     {
         $selectHtml = '<div class="form-group">';
@@ -42,6 +50,11 @@ class Form
 
             if ($formInput['type'] === 'select') {
                 echo $this->generateSelectHtml($formInput['name'], $formInput['placeholder'], $formInput['values']);
+                continue;
+            }
+
+            if ($formInput['type'] === 'text') {
+                echo $this->generateTextareaHtml($formInput['name'], $formInput['placeholder']);
                 continue;
             }
 
