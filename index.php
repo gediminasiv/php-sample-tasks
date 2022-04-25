@@ -37,6 +37,8 @@ session_start(); ?>
       include 'tasks/login.php';
     } else if ($page === 'blog-list') {
       include 'backend/blog-list.php';
+    } else if ($page === 'blog-inner') {
+      include 'backend/blog-inner.php';
     } else if ($page === 'logout') {
       unset($_SESSION['userId']);
       header('Location: ?page=movies');

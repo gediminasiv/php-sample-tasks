@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+include 'backend/class/database.php';
+include 'backend/class/user.php';
+include 'backend/class/form.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +21,11 @@
 
 <body>
     <div class="container">
-
+        <?php if (!isset($_SESSION['userId'])) {
+            include 'backend/admin/login.php';
+        } else { ?>
+            Vartotojas prisijungęs
+        <?php } ?>
     </div>
 </body>
 

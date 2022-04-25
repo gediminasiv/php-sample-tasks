@@ -1,12 +1,10 @@
 <?php
 
-include 'form.php';
-
 $form = new Form([
     [
         'name' => 'username',
         'placeholder' => 'Username',
-        'type' => 'text'
+        'type' => 'input'
     ],
     [
         'name' => 'password',

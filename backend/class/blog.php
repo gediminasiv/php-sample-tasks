@@ -31,7 +31,13 @@ class Blog extends Database
 
     function getPosts($categoryId)
     {
-        $query = 'SELECT * FROM blog
+        $query = 'SELECT blog.id,
+            blog_category.name,
+            blog.title,
+            blog.content,
+            blog.image_url,
+            blog.bolded_text,
+            blog.date FROM blog
         LEFT JOIN blog_category ON blog.category_id = blog_category.id';
         $params = [];
 
@@ -46,6 +52,14 @@ class Blog extends Database
         $postsQuery->execute($params);
 
         return $postsQuery->fetchAll();
+    }
+
+    function getPost($id)
+    {
+        $postQuery = $this->pdo->prepare('SELECT * FROM blog WHERE id=:id');
+        $postQuery->execute(['id' => $id]);
+
+        return $postQuery->fetch();
     }
 
     function getCategories()
