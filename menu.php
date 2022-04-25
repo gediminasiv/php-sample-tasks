@@ -31,6 +31,10 @@ function generateLink($linkTo, $linkTitle)
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
           <li class="nav-item">
+            <?= generateLink('blog-list', 'Blog list'); ?>
+          </li>
+
+          <li class="nav-item">
             <?= generateLink('movies', 'Movie list'); ?>
           </li>
 

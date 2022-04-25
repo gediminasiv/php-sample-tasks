@@ -30,14 +30,14 @@ function registerUser()
         $_SESSION['registerError'] = 'Šis vartotojas užregistruotas';
 
         header('Location: ?page=register');
-        return;
+        die;
     }
 
     if ($_POST['password'] !== $_POST['passwordRepeat']) {
         $_SESSION['registerError'] = 'Jūsų slaptažodžiai nesutampa';
         // dar vienas klaidos aprasymo pridejimas
         header('Location: ?page=register');
-        return;
+        die;
     }
 
     $newUser = [
@@ -50,7 +50,10 @@ function registerUser()
 
     // sekmes pranesimo aprasymo pridejimas
 
+    $_SESSION['registerSuccess'] = 'Jūsų registracija sėkminga! Galite prisijungti';
+
     header('Location: ?page=register');
+    die;
 }
 
 if (isset($_POST['submit'])) {
@@ -60,6 +63,7 @@ if (isset($_POST['submit'])) {
 function generateAlert($alertText, $alertType)
 {
     $_SESSION['registerError'] = '';
+    $_SESSION['registerSuccess'] = '';
 
     return '<div class="alert ' . $alertType . '">' . $alertText . '</div>';
 }
@@ -72,7 +76,10 @@ function generateAlert($alertText, $alertType)
             <div class="card-body">
                 <h3>Registracija</h3>
 
-                <?= generateAlert('Jūsų registracija sėkminga! Galite prisijungti.', 'alert-success'); ?>
+                <?php if (isset($_SESSION['registerSuccess']) && !empty($_SESSION['registerSuccess'])) { ?>
+                    <?= generateAlert($_SESSION['registerSuccess'], 'alert-success'); ?>
+                <?php
+                } ?>
 
                 <?php if (isset($_SESSION['registerError']) && !empty($_SESSION['registerError'])) { ?>
                     <?= generateAlert($_SESSION['registerError'], 'alert-danger'); ?>
