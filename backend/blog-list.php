@@ -50,7 +50,9 @@ if (isset($_POST['submit'])) {
     die;
 }
 
-$posts = $blog->getPosts();
+$category = isset($_GET['category']) ? $_GET['category'] : null;
+
+$posts = $blog->getPosts($category);
 
 ?>
 
@@ -59,6 +61,7 @@ $posts = $blog->getPosts();
         <div class="card">
             <h2>Categories</h2>
             <ul>
+                <li><a href="?page=blog-list">All</a></li>
                 <?php foreach ($categories as $category) { ?>
                     <li><a href="?page=blog-list&category=<?= $category['id']; ?>"><?= $category['name']; ?></a></li>
                 <?php } ?>
@@ -74,7 +77,7 @@ $posts = $blog->getPosts();
 
                             <p>Category: <?= $post['name']; ?></p>
 
-                            <p class="card-text"><?= $post['content']; ?></p>
+                            <p class="card-text"><?= substr($post['content'], 0, 100); ?>...</p>
 
                             <a href="?page=blog-inner&id=<?= $post['id']; ?>" class="btn btn-primary stretched-link">
                                 Learn more

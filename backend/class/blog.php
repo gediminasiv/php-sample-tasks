@@ -29,11 +29,21 @@ class Blog extends Database
         ]);
     }
 
-    function getPosts()
+    function getPosts($categoryId)
     {
-        $postsQuery = $this->pdo->prepare('SELECT * FROM blog
-            LEFT JOIN blog_category ON blog.category_id = blog_category.id');
-        $postsQuery->execute();
+        $query = 'SELECT * FROM blog
+        LEFT JOIN blog_category ON blog.category_id = blog_category.id';
+        $params = [];
+
+        if ($categoryId) {
+            $query .= ' WHERE blog.category_id = :categoryId';
+            $params = [
+                'categoryId' => $categoryId
+            ];
+        }
+
+        $postsQuery = $this->pdo->prepare($query);
+        $postsQuery->execute($params);
 
         return $postsQuery->fetchAll();
     }
