@@ -6,50 +6,6 @@ $blog = new Blog();
 
 $categories = $blog->getCategories();
 
-$form = new Form([
-    [
-        'type' => 'select',
-        'name' => 'category',
-        'placeholder' => 'Select category',
-        'values' => $categories
-    ],
-    [
-        'type' => 'file',
-        'name' => 'image_url',
-        'placeholder' => 'Blog image'
-    ],
-    [
-        'type' => 'input',
-        'name' => 'bolded_text',
-        'placeholder' => 'Bolded text in blog'
-    ],
-    [
-        'type' => 'input',
-        'name' => 'title',
-        'placeholder' => 'Blog title'
-    ], [
-        'type' => 'text',
-        'name' => 'content',
-        'placeholder' => 'Blog content'
-    ]
-]);
-
-if (isset($_POST['submit'])) {
-    $categoryId = $_POST['category'];
-    $title = $_POST['title'];
-    $content = $_POST['content'];
-    $boldedText = $_POST['bolded_text'];
-
-    $filename = 'uploads/' . time() . "_" . $_FILES['image_url']['name'];
-
-    move_uploaded_file($_FILES['image_url']['tmp_name'], $filename);
-
-    $blog->savePost($categoryId, $title, $content, $filename, $boldedText);
-
-    header('Location: ?page=blog-list');
-    die;
-}
-
 $category = isset($_GET['category']) ? $_GET['category'] : null;
 
 $posts = $blog->getPosts($category);
@@ -87,11 +43,5 @@ $posts = $blog->getPosts($category);
                 <?php } ?>
             </div>
         </div>
-    </div>
-
-    <div class="col-3">
-        <h2>New blog post</h2>
-
-        <?= $form->generateFormHtml(); ?>
     </div>
 </div>

@@ -25,9 +25,15 @@ include 'backend/class/form.php';
             include 'backend/admin/login.php';
         } else {
             include 'backend/admin/menu.php';
-        ?>
 
-            Vartotojas prisijungęs
+            $page = isset($_GET['page']) ? $_GET['page'] : 'blog';
+
+            if ($page === 'blog') {
+                include 'backend/admin/blog.php';
+            } else if ($page === 'add-blog') {
+                include 'backend/admin/add-blog.php';
+            }
+        ?>
         <?php } ?>
     </div>
 </body>
