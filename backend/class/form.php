@@ -3,6 +3,7 @@
 class Form
 {
     public $formInputs;
+    public $id;
 
     function __construct($formInputs)
     {
@@ -43,7 +44,7 @@ class Form
 
     function generateFormHtml()
     {
-        echo '<form method="post" enctype="multipart/form-data">';
+        echo '<form method="post" enctype="multipart/form-data" id="' . $this->id . '">';
 
         foreach ($this->formInputs as $formInput) {
             $class = isset($formInput['class']) ? $formInput['class'] : null;
