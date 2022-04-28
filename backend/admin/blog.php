@@ -29,8 +29,8 @@ $posts = $blog->getPosts(null);
                         </span>
 
                         <div>
-                            <button class="btn btn-success btn-sm">Edit</button>
-                            <button class="btn btn-danger btn-sm">Delete</button>
+                            <a href="?page=edit-blog&post=<?= $post['id']; ?>" class="btn btn-success btn-sm">Edit</a>
+                            <a href="?page=delete-blog&post=<?= $post['id']; ?>" class="btn btn-danger btn-sm">Delete</a>
                         </div>
                     </li>
                 <?php } ?>
